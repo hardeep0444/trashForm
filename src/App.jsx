@@ -1,26 +1,17 @@
 import "./App.css";
 import React from "react";
-import { selectExportData, setExportData } from "./store/jsonSlice.js";
+import ReduxFrontendForm from "./components/ReduxFrontendForm.jsx";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
-  const dispatch = useDispatch();
-  const exportData = useSelector(selectExportData);
+  const exportData = useSelector((state) => state.json.value);
 
-  const generateJson = () => {
-    const dataToExport = {
-      key1: "value1",
-      key2: "value2",
-      key3: "value3",
-    };
-    dispatch(setExportData(dataToExport));
-  };
-  // generateJson();
+  console.log("from App.js", exportData);
   return (
     <>
       Home
-      <button onClick={generateJson}>ClickMe</button>
+      <ReduxFrontendForm />
     </>
   );
 }

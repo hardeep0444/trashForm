@@ -5,11 +5,11 @@ const jsonSlice = createSlice({
   initialState: { value: {} },
   reducers: {
     setExportData: (state, action) => {
-      state.value = action.payload;
+      const newData = { ...state.value, ...action.payload };
+      state.value = newData;
     },
   },
 });
 
 export const { setExportData } = jsonSlice.actions;
-export const selectExportData = (state) => state.json.value;
 export default jsonSlice.reducer;

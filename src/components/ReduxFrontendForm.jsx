@@ -65,39 +65,33 @@ export default function ReduxFrontendForm() {
               </option>
             ))}
           </select>
-          {
-            selectedOption === "Boolean" ? (
+          {selectedOption === "Boolean" ? (
+            <>
+              <select id="dropdown" value={boolOps} onChange={handleBoolChange}>
+                {boolState.map((m, i) => (
+                  <option key={i} value={JSON.parse(m)}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+            </>
+          ) : (
+            selectedOption && (
               <>
-                <select
-                  id="dropdown"
-                  value={boolOps}
-                  onChange={handleBoolChange}
-                >
-                  {boolState.map((m, i) => (
-                    <option key={i} value={JSON.parse(m)}>
-                      {m}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <label htmlFor="value">Value:</label>
+                  <input
+                    type={selectedOption}
+                    id="value"
+                    value={formData.field2}
+                    onChange={(e) =>
+                      setformData({ ...formData, field2: e.target.value })
+                    }
+                  />
+                </div>
               </>
-            ) : (
-              selectedOption && (
-                <>
-                  <div>
-                    <label htmlFor="value">Value:</label>
-                    <input
-                      type="text"
-                      id="value"
-                      value={formData.field2}
-                      onChange={(e) =>
-                        setformData({ ...formData, field2: e.target.value })
-                      }
-                    />
-                  </div>
-                </>
-              )
             )
-          }
+          )}
         </div>
 
         <button type="submit">Submit</button>
